@@ -1,10 +1,6 @@
 #import "ReactNativeFingerprintScanner.h"
 
-#if __has_include(<React/RCTUtils.h>) // React Native >= 0.40
 #import <React/RCTUtils.h>
-#else // React Native < 0.40
-#import "RCTUtils.h"
-#endif
 
 @implementation ReactNativeFingerprintScanner
 
@@ -166,11 +162,7 @@ RCT_EXPORT_METHOD(authenticate: (NSString *)reason
 
 - (NSString *)getBiometryType:(LAContext *)context
 {
-    if (@available(iOS 11, *)) {
-        return context.biometryType == LABiometryTypeFaceID ? @"Face ID" : @"Touch ID";
-    }
-
-    return @"Touch ID";
+    return context.biometryType == LABiometryTypeFaceID ? @"Face ID" : @"Touch ID";
 }
 
 @end
